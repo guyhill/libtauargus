@@ -6,7 +6,7 @@ MKDIR           = mkdir
 RM              = rm -f
 CP              = cp -p
 
-32BIT           = true
+32BIT           = false
 #32BIT           = false
 
 SWIGDIR         = D:/Peter-Paul/Documents/Thuiswerk/Programmatuur/swigwin-4.0.2
@@ -15,7 +15,7 @@ ifeq ($(32BIT), false)  # 64 bit assumed
     BITS        = -m64 -D_LP64
     ARCH        = x86_64
     CND_PLATFORM= MinGW-Windows64
-    JAVADIR     = ../../../Java/zulu8.52.0.23-ca-jdk8.0.282-win_x64
+    JAVADIR     = /usr/lib/jvm/java-21-openjdk-amd64
     GNUDIR      = C:/Progra~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin
 else                    # 32 bit assumed
     BITS        = -m32
@@ -25,14 +25,14 @@ else                    # 32 bit assumed
     GNUDIR      = C:/Progra~2/mingw-w64/i686-8.1.0-win32-sjlj-rt_v6-rev0/mingw32/bin
 endif
 
-JAVAINC         = -I$(JAVADIR)/include -I$(JAVADIR)/include/win32
-CXX             = $(GNUDIR)/g++
-LINK            = $(GNUDIR)/g++
-WINDRES         = $(GNUDIR)/windres
-SWIG            = $(SWIGDIR)/swig.exe
+JAVAINC         = -I$(JAVADIR)/include -I$(JAVADIR)/include/linux
+CXX             = g++
+LINK            = g++
+WINDRES         = x86_64-w64-mingw32-windres
+SWIG            = swig
 
 # Macros
-CND_DLIB_EXT    = dll
+CND_DLIB_EXT    = so
 CND_CONF        = Debug
 CND_DISTDIR     = dist
 CND_BUILDDIR    = build
@@ -60,7 +60,7 @@ CFLAGS          = -Wall $(BITS) -std=c++11 -fPIC -Wno-unused-function -fno-stric
 #CFLAGS          += -O2 -g#-DNDEBUG -O2
 CFLAGS          += -O2 -ggdb -g3#-DNDEBUG -O2
 CFLAGS          += $(JAVAINC)
-LDFLAGS         = $(CFLAGS) -Wl,--subsystem,windows -Wl,--kill-at -shared -static-libgcc -static-libstdc++
+LDFLAGS         = $(CFLAGS) -shared -static-libgcc -static-libstdc++
 
 
 # Exclude source files needed for a COM dll for Visual Basic 6.0
@@ -69,9 +69,9 @@ SWIGSOURCES      = $(SRCDIR)/TauArgusJava.swg
 GENERATED_SOURCES= $(patsubst $(SRCDIR)/%.swg,$(SRCDIR)/%_wrap.cpp,$(SWIGSOURCES))
 SOURCES          = $(filter-out $(NOSOURCES),$(wildcard $(SRCDIR)/*.cpp))
 
-OBJECTS          = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES) $(GENERATED_SOURCES)) $(OBJDIR)/Versioninfo.o
+OBJECTS          = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES) $(GENERATED_SOURCES)) #$(OBJDIR)/Versioninfo.o
 
-LIBFILENAME      = $(LIBNAME).dll
+LIBFILENAME      = $(LIBNAME).$(CND_DLIB_EXT)
 
 TARGET           = $(LIBDIR)/$(LIBFILENAME)
 
