@@ -4,8 +4,8 @@
 /ReleaseMinSize
 /ReleaseUMinDependency
 /ReleaseUMinSize
-/build
-/dist
+/build/
+/dist/
 /src/NewTauArgus_i.c
 /src/NewTauArgus_p.c
 /src/dlldata.c
