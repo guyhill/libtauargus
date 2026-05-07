@@ -60,7 +60,7 @@ CFLAGS          = -Wall $(BITS) -std=c++11 -fPIC -Wno-unused-function -fno-stric
 #CFLAGS          += -O2 -g#-DNDEBUG -O2
 CFLAGS          += -O2 -ggdb -g3#-DNDEBUG -O2
 CFLAGS          += $(JAVAINC)
-LDFLAGS         = $(CFLAGS) -shared -static-libgcc -static-libstdc++
+LDFLAGS         = $(CFLAGS) -shared -static-libgcc -static-libstdc++ -Bsymbolic
 
 
 # Exclude source files needed for a COM dll for Visual Basic 6.0
