@@ -15,7 +15,7 @@ ifeq ($(32BIT), false)  # 64 bit assumed
     BITS        = -m64 -D_LP64
     ARCH        = x86_64
     CND_PLATFORM= MinGW-Windows64
-    JAVADIR     = /usr/lib/jvm/java-8-openjdk
+    JAVADIR     = /usr/lib/jvm/java-8-openjdk-amd64
     GNUDIR      = C:/Progra~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin
 else                    # 32 bit assumed
     BITS        = -m32
